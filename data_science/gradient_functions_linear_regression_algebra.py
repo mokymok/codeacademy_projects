@@ -18,9 +18,17 @@ def get_gradient_at_m(x, y, b, m):
   m_gradient = -(2/N) * diff  
   return m_gradient
 
-def step_gradient(x, y, b_current, m_current):
-  b_gradient = get_gradient_at_b(x, y, b_current, m_current)
-  m_gradient = get_gradient_at_m(x, y, b_current, m_current)
-  b = b_current - (0.01 * b_gradient)
-  m = m_current - (0.01 * m_gradient)
-  return (b, m)
+#Your step_gradient function here
+def step_gradient(b_current, m_current, x, y, learning_rate):
+    b_gradient = get_gradient_at_b(x, y, b_current, m_current)
+    m_gradient = get_gradient_at_m(x, y, b_current, m_current)
+    b = b_current - (learning_rate * b_gradient)
+    m = m_current - (learning_rate * m_gradient)
+    return [b, m]
+  
+#Your gradient_descent function here:  
+def gradient_descent(x, y, learning_rate, num_iterations):
+  m = b = 0
+  for i in range(num_iterations):
+    b, m = step_gradient(b, m, x, y, learning_rate)
+  return [b, m]
